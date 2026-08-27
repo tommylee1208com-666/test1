@@ -13,7 +13,6 @@
     <meta name="twitter:description" content="Bold art. Minimal storefront." />
     <meta name="twitter:image" content="https://tommylee1208com-666.github.io/pretteemerch-fu-replica/og.png" />
     <title>FU — Custom Merch</title>
-    <script src="config.js"></script>
     <style>
       :root{--ink:#46523e;--muted:rgba(70,82,62,.68);--line:rgba(70,82,62,.14)}
       *{box-sizing:border-box}html{background:#fff;scroll-behavior:smooth}body{margin:0;min-width:320px;background:#fff;color:var(--ink);font-family:Assistant,Arial,sans-serif}.site-shell{min-height:100svh}.skip-link{position:fixed;top:-60px;left:12px;z-index:10;padding:10px 14px;background:var(--ink);color:#fff}.skip-link:focus{top:12px}.announcement{display:grid;grid-template-columns:40px minmax(0,720px) 40px;justify-content:center;align-items:center;height:40px;border-bottom:1px solid var(--line);color:#5c302d}.announcement p{margin:0;text-align:center;font-size:12px;letter-spacing:.11em}.announcement button{display:grid;width:40px;height:40px;place-items:center;border:0;background:transparent;color:inherit;font-size:17px;cursor:pointer}.announcement-copy{animation:announcement-in .42s ease both}@keyframes announcement-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.hero{display:flex;min-height:calc(100svh - 40px);flex-direction:column;align-items:center;padding:8px 24px 61px}.artwork{width:min(596px,calc(100vw - 48px));margin:0}.artwork img{display:block;width:100%;height:auto}.shop-cta{position:static;flex:0 0 auto;padding-top:28px;text-align:center}.shop-cta p{margin:0 0 25px;color:var(--muted);font-size:16px;letter-spacing:.015em}.shop-cta a{display:inline-grid;min-width:122px;min-height:48px;place-items:center;border:1px solid var(--ink);color:var(--ink);font-size:15px;letter-spacing:.06em;text-decoration:none;transition:.16s ease}.shop-cta a:hover,.shop-cta a:focus-visible{background:var(--ink);color:#fff}
@@ -30,17 +29,18 @@
         <section class="shop-cta"><p>Get your own here!</p><a id="shop-link" target="_blank" rel="noreferrer">Shop</a></section>
       </main>
     </div>
-    <script>
-      const messages=['CUSTOM PRINTING · CUSTOM DESIGN · TRENDING MERCH · ALL IN ONE PLACE','WELCOME TO OUR STORE','MAKE IT YOURS · WEAR IT YOUR WAY'];
+    <script type="module">
+      import SITE_CONFIG from './config.js';
+      const messages=SITE_CONFIG.announcements;
       let messageIndex=0;
       const copy=document.getElementById('announcement-copy');
       const renderMessage=()=>{copy.classList.remove('announcement-copy');void copy.offsetWidth;copy.textContent=messages[messageIndex];copy.classList.add('announcement-copy')};
       const changeMessage=(step)=>{messageIndex=(messageIndex+step+messages.length)%messages.length;renderMessage()};
       document.getElementById('announcement-prev').addEventListener('click',()=>changeMessage(-1));
       document.getElementById('announcement-next').addEventListener('click',()=>changeMessage(1));
-      document.getElementById('featured-image').src=window.SITE_CONFIG.imageUrl;
-      document.getElementById('shop-link').href=window.SITE_CONFIG.shopUrl;
-      renderMessage();setInterval(()=>changeMessage(1),3500);
+      document.getElementById('featured-image').src=SITE_CONFIG.imageUrl;
+      document.getElementById('shop-link').href=SITE_CONFIG.shopUrl;
+      renderMessage();setInterval(()=>changeMessage(1),SITE_CONFIG.announcementInterval);
     </script>
   </body>
 </html>
