@@ -7,11 +7,11 @@
     <meta property="og:title" content="FU — Custom Merch" />
     <meta property="og:description" content="Bold art. Minimal storefront." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://tommylee1208com-666.github.io/pretteemerch-fu-replica/og.png" />
+    <meta property="og:image" content="https://tommylee1208com-666.github.io/test1/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="FU — Custom Merch" />
     <meta name="twitter:description" content="Bold art. Minimal storefront." />
-    <meta name="twitter:image" content="https://tommylee1208com-666.github.io/pretteemerch-fu-replica/og.png" />
+    <meta name="twitter:image" content="https://tommylee1208com-666.github.io/test1/og.png" />
     <title>FU — Custom Merch</title>
     <style>
       :root{--ink:#46523e;--muted:rgba(70,82,62,.68);--line:rgba(70,82,62,.14)}
@@ -30,7 +30,11 @@
       </main>
     </div>
     <script type="module">
-      import SITE_CONFIG from './config.js';
+      const { default: SITE_CONFIG } = await import(`./config.js?v=${Date.now()}`);
+      const isHttpUrl=(value)=>{try{return ['http:','https:'].includes(new URL(value).protocol)}catch{return false}};
+      if(!isHttpUrl(SITE_CONFIG.imageUrl)||!isHttpUrl(SITE_CONFIG.shopUrl)||!Array.isArray(SITE_CONFIG.announcements)||SITE_CONFIG.announcements.length===0||!Number.isFinite(SITE_CONFIG.announcementInterval)||SITE_CONFIG.announcementInterval<=0){
+        throw new Error('Invalid config.js: use plain HTTP(S) URLs, at least one announcement, and a positive interval.');
+      }
       const messages=SITE_CONFIG.announcements;
       let messageIndex=0;
       const copy=document.getElementById('announcement-copy');
