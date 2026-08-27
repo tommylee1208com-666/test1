@@ -6,7 +6,7 @@ const SITE_CONFIG = {
   announcements: [
     'CUSTOM PRINTING · CUSTOM DESIGN · TRENDING MERCH · ALL IN ONE PLACE',
     'WELCOME TO OUR STORE',
-    '666'
+    '777'
   ],
   announcementInterval: 3500
 };
